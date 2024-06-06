@@ -1,6 +1,6 @@
 # PokéFetch
 
-<img src="demo.png" style="width: 30%">
+<img src="demo.png" style="width: 50%">
 
 Displays a random Pokémon from the PokéAPI in your terminal.
 
