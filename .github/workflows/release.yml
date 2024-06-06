@@ -1,0 +1,14 @@
+name: Create Release
+
+on:
+  push:
+    branches:
+      - master
+
+jobs:
+  create_release:
+    name: Create Release
+    runs-on: ubuntu-latest
+    steps:
+      - name: Go Release Binaries
+        uses: wangyoucao577/go-release-action@v1.50
