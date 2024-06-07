@@ -21,6 +21,12 @@ go build
 ./pokefetch # or pokefetch.exe on Windows
 ```
 
+4. Optionally, you can pass an `id` argument to display a specific Pokémon:
+
+```sh
+./pokefetch -id 1 # or pokefetch.exe -id 1 on Windows (displays Bulbasaur)
+```
+
 ## Terminal Startup
 
 You can add this to your shell's startup script to display a random Pokémon every time you open a new terminal window.

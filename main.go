@@ -1,6 +1,7 @@
 package main
 
 import (
+	"flag"
 	"fmt"
 	"math/rand"
 	"strings"
@@ -9,7 +10,15 @@ import (
 )
 
 func main() {
-	dexId := rand.Intn(898) + 1
+	pokemonID := flag.Int("id", 0, "Pokémon ID to fetch. If not provided, a random ID will be used.")
+	flag.Parse()
+
+	dexId := *pokemonID
+
+	if dexId == 0 {
+		dexId = rand.Intn(898) + 1
+	}
+
 	pokemonData := fetchPokemonData(dexId)
 	pokemonSpeciesData := fetchPokemonSpeciesData(dexId)
 
