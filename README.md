@@ -21,11 +21,14 @@ go build
 ./pokefetch # or pokefetch.exe on Windows
 ```
 
-4. Optionally, you can pass an `id` argument to display a specific Pokémon:
+## Flags
 
-```sh
-./pokefetch -id 1 # or pokefetch.exe -id 1 on Windows (displays Bulbasaur)
-```
+- `-id`: The ID of the Pokémon to display (default: random).
+  - If this is provided, it takes precedence over the `-name` flag.
+- `-name`: The name of the Pokémon to display (default: random).
+  - If both `-id` and `-name` are provided, `-id` takes precedence.
+- `-shiny`: Whether to display a guaranteed Pokémon (default: false).
+  - If this is `false`, it rolls a 1/2 chance to display a shiny Pokémon.
 
 ## Terminal Startup
 

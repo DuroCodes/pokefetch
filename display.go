@@ -72,7 +72,7 @@ func pokemonTypeColor(pokemonType string) lipgloss.Color {
 		"ghost":    lipgloss.Color("5"),
 		"dragon":   lipgloss.Color("13"),
 		"dark":     lipgloss.Color("8"),
-		"steel":    lipgloss.Color("15"),
+		"steel":    lipgloss.Color("7"),
 		"fairy":    lipgloss.Color("13"),
 	}
 
@@ -82,19 +82,26 @@ func pokemonTypeColor(pokemonType string) lipgloss.Color {
 	return lipgloss.Color("0")
 }
 
-func getShinyOrRegular() string {
-	if rollShiny() {
+func getShinyOrRegular(shiny bool) string {
+	if shiny {
 		return "shiny"
 	}
 	return "regular"
+}
+
+func getShinyOrRegularColor(shiny bool) lipgloss.Color {
+	if shiny {
+		return lipgloss.Color("11")
+	}
+	return lipgloss.Color("15")
 }
 
 func rollShiny() bool {
 	return rand.Float32() < ShinyChance
 }
 
-func formatPokemonInfo(dexBadge, name, genus, typeBadges, height, weight, flavorText string) string {
-	title := formatTitle(dexBadge, name, genus)
+func formatPokemonInfo(dexBadge, name, genus, typeBadges, height, weight, flavorText string, mainColor lipgloss.Color) string {
+	title := formatTitle(dexBadge, name, genus, mainColor)
 	details := formatDetails(height, weight)
 	flavorTextBox := formatFlavorText(flavorText)
 
@@ -113,8 +120,8 @@ func formatPokemonInfo(dexBadge, name, genus, typeBadges, height, weight, flavor
 	)
 }
 
-func formatTitle(dexBadge, name, genus string) string {
-	return dexBadge + lipgloss.NewStyle().Bold(true).Foreground(lipgloss.Color("15")).Render(fmt.Sprintf(" %s - %s", name, genus))
+func formatTitle(dexBadge, name, genus string, mainColor lipgloss.Color) string {
+	return dexBadge + lipgloss.NewStyle().Bold(true).Foreground(mainColor).Render(fmt.Sprintf(" %s - %s", name, genus))
 }
 
 func formatDetails(height, weight string) string {

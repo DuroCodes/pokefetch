@@ -13,12 +13,23 @@ const (
 	PokemonSpeciesAPI = "https://pokeapi.co/api/v2/pokemon-species"
 )
 
-func fetchPokemonData(dexID int) PokemonData {
-	return fetchData[PokemonData](fmt.Sprintf("%s/%d", PokemonAPI, dexID))
+func fetchPokemonData(pokemon string) PokemonData {
+	return fetchData[PokemonData](fmt.Sprintf("%s/%s", PokemonAPI, pokemon))
 }
 
-func fetchPokemonSpeciesData(dexID int) PokemonSpeciesData {
-	return fetchData[PokemonSpeciesData](fmt.Sprintf("%s/%d", PokemonSpeciesAPI, dexID))
+func fetchPokemonSpeciesData(pokemon string) PokemonSpeciesData {
+	return fetchData[PokemonSpeciesData](fmt.Sprintf("%s/%s", PokemonSpeciesAPI, pokemon))
+}
+
+func isValidPokemonName(name string) bool {
+	resp, err := http.Get(fmt.Sprintf("%s/%s", PokemonAPI, name))
+
+	if err != nil {
+		return false
+	}
+
+	defer resp.Body.Close()
+	return resp.StatusCode == http.StatusOK
 }
 
 func fetchData[T any](url string) T {
