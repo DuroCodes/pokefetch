@@ -21,12 +21,10 @@ func main() {
 	isShiny := *shinyFlag
 
 	if dexId == 0 {
-		if pokeName == "" {
+		if pokeName == "" || !isValidPokemonName(pokeName) {
 			dexId = rand.Intn(898) + 1
-		} else if isValidPokemonName(pokeName) {
-			dexId = fetchPokemonData(pokeName).Id
 		} else {
-			dexId = rand.Intn(898) + 1
+			dexId = fetchPokemonData(pokeName).Id
 		}
 	}
 
