@@ -12,13 +12,13 @@ import (
 func main() {
 	pokemonID := flag.Int("id", 0, "Pokémon ID to fetch. If not provided, a random ID will be used.")
 	pokemonName := flag.String("name", "", "Pokémon name to fetch. If not provided, a random Pokémon will be used.")
-	shinyFlag := flag.Bool("shiny", false, "Should the Pokémon be shiny?")
+	shinyFlag := flag.Float64("shiny", 0.5, "Odds of the Pokémon being shiny. Default is 0.5.")
 
 	flag.Parse()
 
 	dexId := *pokemonID
 	pokeName := *pokemonName
-	isShiny := *shinyFlag
+	shinyOdds := *shinyFlag
 
 	if dexId == 0 {
 		if pokeName == "" || !isValidPokemonName(pokeName) {
@@ -26,10 +26,6 @@ func main() {
 		} else {
 			dexId = fetchPokemonData(pokeName).Id
 		}
-	}
-
-	if !isShiny {
-		isShiny = rollShiny()
 	}
 
 	dexIdStr := fmt.Sprintf("%d", dexId)
@@ -42,6 +38,7 @@ func main() {
 	genus := getEnglishGenus(pokemonSpeciesData.Genera)
 	flavorText := getEnglishFlavorText(pokemonSpeciesData.FlavorTextEntries)
 	typeBadges := getTypeBadges(pokemonData.Types)
+	isShiny := rollShiny(shinyOdds)
 
 	mainColor := getShinyOrRegularColor(isShiny)
 	dexBadge := createTextBadge(fmt.Sprintf("No.%03d", dexId), mainColor, true)

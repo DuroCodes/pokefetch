@@ -8,8 +8,6 @@ import (
 	"github.com/charmbracelet/lipgloss"
 )
 
-const ShinyChance = 0.5
-
 func getEnglishName(names []PokemonSpeciesName) string {
 	for _, name := range names {
 		if name.Language.Name == "en" {
@@ -96,8 +94,8 @@ func getShinyOrRegularColor(shiny bool) lipgloss.Color {
 	return lipgloss.Color("15")
 }
 
-func rollShiny() bool {
-	return rand.Float32() < ShinyChance
+func rollShiny(chance float64) bool {
+	return rand.Float64() < chance
 }
 
 func formatPokemonInfo(dexBadge, name, genus, typeBadges, height, weight, flavorText string, mainColor lipgloss.Color) string {

@@ -4,8 +4,6 @@
 
 Displays a random Pokémon from the PokéAPI in your terminal.
 
-You can also get shiny Pokémon with a 1/2 chance; you can change the probability in the `display.go` file.
-
 ## Usage
 
 1. Clone the repository.
@@ -27,8 +25,8 @@ go build
   - If this is provided, it takes precedence over the `-name` flag.
 - `-name`: The name of the Pokémon to display (default: random).
   - If both `-id` and `-name` are provided, `-id` takes precedence.
-- `-shiny`: Whether to display a guaranteed Pokémon (default: false).
-  - If this is `false`, it rolls a 1/2 chance to display a shiny Pokémon.
+- `-shiny`: The chance of the Pokémon being shiny (default: 0.5).
+  - This is a float between 0 and 1.
 
 ## Terminal Startup
 
