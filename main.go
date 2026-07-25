@@ -13,7 +13,7 @@ func main() {
 	pokemonID := flag.Int("id", 0, "Pokémon ID to fetch. If not provided, a random ID will be used.")
 	pokemonName := flag.String("name", "", "Pokémon name to fetch. If not provided, a random Pokémon will be used.")
 	shinyFlag := flag.Float64("shiny", 0.5, "Odds of the Pokémon being shiny. Default is 0.5.")
-	localeFlag := flag.String("locale", "en", "Locale to fetch the pokemon name and flavor text for, default is 'en'")
+	localeFlag := flag.String("locale", "en", "Locale to fetch the pokemon name and flavor text for. Default is 'en'.")
 
 	flag.Parse()
 
