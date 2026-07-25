@@ -35,3 +35,13 @@ type PokemonSpeciesData struct {
 	Genera            []PokemonSpeciesGenera     `json:"genera"`
 	FlavorTextEntries []PokemonSpeciesFlavorText `json:"flavor_text_entries"`
 }
+
+type PokemonTypeData struct {
+	Name  string               `json:"name"`
+	Names []PokemonSpeciesName `json:"names"`
+}
+
+type uiLabels struct {
+	Height string
+	Weight string
+}

@@ -11,6 +11,7 @@ import (
 const (
 	PokemonAPI        = "https://pokeapi.co/api/v2/pokemon"
 	PokemonSpeciesAPI = "https://pokeapi.co/api/v2/pokemon-species"
+	PokemonTypeAPI    = "https://pokeapi.co/api/v2/type"
 )
 
 func fetchPokemonData(pokemon string) PokemonData {
@@ -19,6 +20,10 @@ func fetchPokemonData(pokemon string) PokemonData {
 
 func fetchPokemonSpeciesData(pokemon string) PokemonSpeciesData {
 	return fetchData[PokemonSpeciesData](fmt.Sprintf("%s/%s", PokemonSpeciesAPI, pokemon))
+}
+
+func fetchPokemonTypeData(typeName string) PokemonTypeData {
+	return fetchData[PokemonTypeData](fmt.Sprintf("%s/%s", PokemonTypeAPI, typeName))
 }
 
 func isValidPokemonName(name string) bool {
