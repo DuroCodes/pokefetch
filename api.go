@@ -51,16 +51,40 @@ func fetchData[T any](url string) T {
 	return data
 }
 
-func fetchPokemonImage(url string) string {
+func fetchPokemonImage(url string) (string, bool) {
 	resp, err := http.Get(url)
 	if err != nil {
-		log.Fatal(err)
+		return "", false
 	}
 	defer resp.Body.Close()
 
+	if resp.StatusCode != http.StatusOK {
+		return "", false
+	}
+
 	body, err := io.ReadAll(resp.Body)
 	if err != nil {
-		log.Fatal(err)
+		return "", false
 	}
-	return string(body)
+	return string(body), true
+}
+
+// loads sprite by PokeAPI form slug, falling back to species name
+// forms like deoxys-normal are keyed as deoxys in colorscripts
+func fetchColorscript(shiny bool, pokemonName, speciesName string) string {
+	for _, name := range []string{pokemonName, speciesName} {
+		if name == "" {
+			continue
+		}
+		url := fmt.Sprintf(
+			"https://gitlab.com/phoneybadger/pokemon-colorscripts/-/raw/main/colorscripts/small/%s/%s",
+			getShinyOrRegular(shiny),
+			name,
+		)
+		if image, ok := fetchPokemonImage(url); ok {
+			return image
+		}
+	}
+	log.Fatalf("failed to fetch colorscript for %q (species %q)", pokemonName, speciesName)
+	return ""
 }

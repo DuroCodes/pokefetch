@@ -4,7 +4,6 @@ import (
 	"flag"
 	"fmt"
 	"math/rand"
-	"strings"
 
 	"github.com/charmbracelet/lipgloss"
 )
@@ -36,8 +35,6 @@ func main() {
 
 	weightKg := float64(pokemonData.Weight) / 10.0
 
-	// colorscripts are keyed by english name
-	englishName := getLocalizedName(pokemonSpeciesData.Names, "en")
 	localeName := getLocalizedName(pokemonSpeciesData.Names, locale)
 	weight := fmt.Sprintf("%.1fkg", weightKg)
 	height := fmt.Sprintf("%.1fm", float32(pokemonData.Height)/10)
@@ -50,9 +47,7 @@ func main() {
 	mainColor := getShinyOrRegularColor(isShiny)
 	dexBadge := createTextBadge(fmt.Sprintf("No.%03d", dexId), mainColor, true)
 
-	pokemonImageURL := fmt.Sprintf("https://gitlab.com/phoneybadger/pokemon-colorscripts/-/raw/main/colorscripts/small/%s/%s", getShinyOrRegular(isShiny), strings.ToLower(englishName))
-
-	pokemonImage := fetchPokemonImage(pokemonImageURL)
+	pokemonImage := fetchColorscript(isShiny, pokemonData.Name, pokemonSpeciesData.Name)
 	pokemonInfo := formatPokemonInfo(dexBadge, localeName, genus, typeBadges, labels.Height, labels.Weight, height, weight, flavorText, mainColor)
 
 	output := lipgloss.JoinHorizontal(
