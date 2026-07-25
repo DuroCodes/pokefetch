@@ -9,6 +9,7 @@ type PokemonType struct {
 }
 
 type PokemonData struct {
+	Name   string        `json:"name"`
 	Types  []PokemonType `json:"types"`
 	Height int           `json:"height"`
 	Weight int           `json:"weight"`
@@ -31,7 +32,18 @@ type PokemonSpeciesFlavorText struct {
 }
 
 type PokemonSpeciesData struct {
+	Name              string                     `json:"name"`
 	Names             []PokemonSpeciesName       `json:"names"`
 	Genera            []PokemonSpeciesGenera     `json:"genera"`
 	FlavorTextEntries []PokemonSpeciesFlavorText `json:"flavor_text_entries"`
+}
+
+type PokemonTypeData struct {
+	Name  string               `json:"name"`
+	Names []PokemonSpeciesName `json:"names"`
+}
+
+type uiLabels struct {
+	Height string
+	Weight string
 }

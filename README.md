@@ -27,6 +27,8 @@ go build
   - If both `-id` and `-name` are provided, `-id` takes precedence.
 - `-shiny`: The chance of the Pokémon being shiny (default: 0.5).
   - This is a float between 0 and 1.
+- `-locale`: Language for the Pokémon name, genus, flavor text, types, and height/weight labels (default: `en`).
+  - Examples: `fr`, `de`, `es`, `it`, `ja`, `ko`, `zh-hans`.
 
 ## Terminal Startup
 
